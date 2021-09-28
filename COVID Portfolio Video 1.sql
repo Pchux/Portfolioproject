@@ -70,7 +70,8 @@ order by 2,3
 --with CTE
 With popvsvac (location, date, population, new_vaccinations, total_vac_per_location)
 as
-(Select dea.location, dea.date, dea.population, vac. new_vaccinations, 
+(
+  Select dea.location, dea.date, dea.population, vac. new_vaccinations, 
 sum(cast(vac.new_vaccinations as bigint)) over (partition by dea.location) as total_vac_per_location
 from "'Covid Deaths$'" as dea
 join "'Covid Vaccinations$'" as vac
